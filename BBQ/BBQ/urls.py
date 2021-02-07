@@ -21,8 +21,8 @@ from BBQ.accounts import views as accounts_views
 
 
 urlpatterns = [
-    path(r'^$', accounts_views.home, name='home'),
-    path(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
-    path(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),
-    path(r'^signup/$', accounts_views.signup, name='signup'),
+    path(r'', accounts_views.home, name='home'),
+    path(r'login/', accounts_views.login_page, {'template_name': 'login.html'}, name='login'),
+    path(r'logout/', accounts_views.logout_page, {'next_page': 'login'}, name='logout'),
+    path(r'signup/', accounts_views.signup, name='signup'),
 ]
