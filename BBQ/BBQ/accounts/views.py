@@ -53,3 +53,7 @@ def login_page(request,template_name):
 def logout_page(request,next_page):
     logout(request)
     return redirect('home')
+
+def dishes_page(request):
+    if request.method == 'POST'
+        # obejct.all
