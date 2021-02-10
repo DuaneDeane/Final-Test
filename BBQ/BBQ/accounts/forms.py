@@ -15,4 +15,4 @@ class SignUpForm(UserCreationForm):
 
 class LoginForm(forms.Form):
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-    password1 = forms.PasswordInput()
+    password1 = forms.CharField(widget=forms.PasswordInput())

@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
@@ -23,10 +23,14 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             re_password = form.cleaned_data.get('password2')
             if raw_password == re_password:
-                user = User.objects.get(username=email)
+                user = None
+                try:
+                    user = User.objects.get(username=email)
+                except Exception as e:
+                    pass
                 if user != None:
                     return redirect('home') #should report user alerady exist
-                user = User.objects.create_user(username=email, password=raw_password, lastname=lastname, firstname=firstname)
+                user = User.objects.create_user(username=email, password=raw_password, last_name=lastname, first_name=firstname)
                 login(request, user)
             return redirect('home')
     else:
@@ -54,6 +58,6 @@ def logout_page(request,next_page):
     logout(request)
     return redirect('home')
 
-def dishes_page(request):
-    if request.method == 'POST'
+# def dishes_page(request):
+    # if request.method == 'POST':
         # obejct.all
