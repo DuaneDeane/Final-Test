@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'zjg8%(z&x8s=^2!cn)5%-(!7+2mg2)*z8zj+k8i9c0+(emeiup'
-GOOGLE_MAPS_API_KEY
+GOOGLE_MAPS_API_KEY = 'AIzaSyD-UdeV3eu5AEkPpSwAl97-WnXFjEIIYi4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
