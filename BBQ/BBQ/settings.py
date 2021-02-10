@@ -21,6 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'zjg8%(z&x8s=^2!cn)5%-(!7+2mg2)*z8zj+k8i9c0+(emeiup'
+GOOGLE_MAPS_API_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'BBQ',
+    'django_google_maps',
 ]
 
 MIDDLEWARE = [
