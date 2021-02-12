@@ -1,0 +1,5 @@
+.env
+__pycache__/
+Db.sqlite3
+.DS_store
+.py 
