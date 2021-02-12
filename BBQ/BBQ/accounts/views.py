@@ -2,13 +2,18 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from django.conf import settings
 
 from BBQ.accounts.forms import SignUpForm, LoginForm
 
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    print(settings.GOOGLE_MAPS_API_KEY)
+    context = {
+        "APIKEY": settings.GOOGLE_MAPS_API_KEY
+    }
+    return render(request, 'home.html', context)
 
 
 def signup(request):
