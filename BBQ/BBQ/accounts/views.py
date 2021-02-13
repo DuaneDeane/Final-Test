@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.conf import settings
 
-from accounts.forms import SignUpForm, LoginForm
+from BBQ.accounts.forms import SignUpForm, LoginForm
 
 
 @login_required

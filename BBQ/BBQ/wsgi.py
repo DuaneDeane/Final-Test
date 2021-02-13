@@ -16,4 +16,4 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Final.settings')
 
 application = get_wsgi_application()
 
-load_dotenv(os.path.join('.env'))
+load_dotenv(os.path.join('BBQ','.env'))
