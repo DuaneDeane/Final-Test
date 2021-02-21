@@ -25,4 +25,5 @@ urlpatterns = [
     path(r'login/', accounts_views.login_page, {'template_name': 'login.html'}, name='login'),
     path(r'logout/', accounts_views.logout_page, {'next_page': 'login'}, name='logout'),
     path(r'signup/', accounts_views.signup, name='signup'),
+    path(r'pulledpork_search/', accounts_views.pulledpork_search, name="pulledpork_search")
 ]

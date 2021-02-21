@@ -5,15 +5,24 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 
 from BBQ.accounts.forms import SignUpForm, LoginForm
+from BBQ.search import search
 
 
 @login_required
-def home(request):
-    print(settings.GOOGLE_MAPS_API_KEY)
-    context = {
-        "APIKEY": settings.GOOGLE_MAPS_API_KEY
-    }
-    return render(request, 'home.html', context)
+def home(request, results=None, jscode=None):
+    if results == None:
+        print(settings.GOOGLE_MAPS_API_KEY)
+        context = {
+            "APIKEY": settings.GOOGLE_MAPS_API_KEY
+        }
+        return render(request, 'home.html', context)
+    else:
+        context = {
+            "APIKEY": settings.GOOGLE_MAPS_API_KEY,
+            "results": results,
+            "jscode": jscode
+        }
+        return render(request, 'home.html', context)
 
 
 def signup(request):
@@ -63,6 +72,8 @@ def logout_page(request,next_page):
     logout(request)
     return redirect('home')
 
-# def dishes_page(request):
-    # if request.method == 'POST':
-        # obejct.all
+def pulledpork_search(request):
+    api_key = settings.YELP_API_KEY
+    results,jscode = search (api_key)
+    return home(request, results, jscode)
+    
