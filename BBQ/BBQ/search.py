@@ -1,18 +1,21 @@
 from yelpapi import YelpAPI
 from django.conf import settings
 
-def search(api_key):
+import json
+
+def search(api_key, latitude, longitude, term):
     yelp_api = YelpAPI(api_key)
-    # yelp_api = YelpAPI(api_key)
-    search_results = yelp_api.search_query(category="bbq", location="austin, tx", term="pulled pork")
+    # search_results = yelp_api.search_query(category="bbq", location="austin, tx", term="pulled pork")
     
-    lat=""
-    lon=""
-    #search_results = yelp_api.search_query(category="bbq", latitude=lat, longitude=lon)
+    lat=latitude
+    lng=longitude
+    print(lat, lng)
+    search_results = yelp_api.search_query(category="bbq", latitude=lat, longitude=lng, term=term)
 
     nameList = []
     coordinateList = []
     phoneList = []
+    restaurantList = []
 
     for key in search_results:
         if key=="businesses":
@@ -27,10 +30,19 @@ def search(api_key):
                 nameList.append(name)
 
                 lat = coordinates["latitude"]
-                lon = coordinates["longitude"]
+                lng = coordinates["longitude"]
 
-                coordinateList.append( (lat, lon) )
+                coordinateList.append( (lat, lng) )
                 phoneList.append(phone)
+
+                dictionary={
+                    "name":business["name"],
+                    "location":business["location"],
+                    "phone":business["phone"],
+                    "laty":lat,
+                    "lonx":lng,
+                }
+                restaurantList.append(dictionary)
     i = 0
     jsstring = ""
     while i < len(nameList):
@@ -44,6 +56,9 @@ def search(api_key):
     while i < numItems:
         jsstring+="new google.maps.Marker({ position: myCoordinates"+ str(i) +", map, title: \"\" });"
         i += 1
+
+    # with open("search.json", "w") as outfile: 
+    #     json.dump(restaurantList, outfile)
 
     return search_results, jsstring
             #for business_key in business:

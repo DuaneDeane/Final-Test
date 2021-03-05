@@ -17,9 +17,13 @@ def home(request, results=None, jscode=None):
         }
         return render(request, 'home.html', context)
     else:
+        latitude = -25.363
+        longitude = 131.044
         context = {
             "APIKEY": settings.GOOGLE_MAPS_API_KEY,
             "results": results,
+            "latitude": latitude,
+            "longitude": longitude,
             "jscode": jscode
         }
         return render(request, 'home.html', context)
@@ -74,6 +78,39 @@ def logout_page(request,next_page):
 
 def pulledpork_search(request):
     api_key = settings.YELP_API_KEY
-    results,jscode = search (api_key)
+    lat = 89
+    lng = -62
+    if request.method == "POST":
+        lat = request.POST['lat']
+        lng = request.POST['lng']
+        term = request.POST['term']
+        print("Looking for: "+ term)
+    results, jscode = search (api_key, lat, lng, term)
+    # if request.method == "GET":
+    #     print("happy days are here again something soemthing")
+    #     latitude = request.GET.get('lat')
+    #     longitude = request.GET.get('lng')
+    # print (type(results))
     return home(request, results, jscode)
+
+# def brisket_search(request):
+#     api_key = settings.YELP_API_KEY
+#     lat = 89
+#     lng = -62
+#     if request.method == "POST":
+#         lat = request.POST['lat']
+#         lng = request.POST['lng']
+#         term = request.POST['term']
+#     results, jscode = search (api_key, lat, lng, term)
+#     return home(request, results, jscode)
+
+# def chickenquarter_search(request):
+#     api_key = settings.YELP_API_KEY
+#     lat = 89
+#     lng = -62
+#     if request.method == "POST":
+#         lat = request.POST['lat']
+#         lng = request.POST['lng']
+#     results, jscode = search (api_key, lat, lng)
+#     return home(request, results, jscode)
     

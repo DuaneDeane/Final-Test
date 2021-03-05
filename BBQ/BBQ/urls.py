@@ -26,4 +26,9 @@ urlpatterns = [
     path(r'logout/', accounts_views.logout_page, {'next_page': 'login'}, name='logout'),
     path(r'signup/', accounts_views.signup, name='signup'),
     path(r'pulledpork_search/', accounts_views.pulledpork_search, name="pulledpork_search")
+    # path(r'brisket_search/', accounts_views.brisket_search, name="brisket_search")
+    # path(r'chickenquarter_search/', accounts_views.chickenquarter_search, name="chickenquarter_search")
+    # path(r'babybackrib_search/', accounts_views.babybackrib_search, name="babybackrib_search")
+    # path(r'stlouisrib_search/', accounts_views.stlouisrib_search, name="stlouisrib_search")
+    # path(r'sausage_search/', accounts_views.sausage_search, name="sausage_search")
 ]

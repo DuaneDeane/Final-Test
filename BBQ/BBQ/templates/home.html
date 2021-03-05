@@ -3,109 +3,206 @@
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <style type="text/css">
-      /* Set the size of the div element that contains the map */
-      #map {
-        height: 400px;
-        /* The height is 400 pixels */
-        width: 100%;
-        /* The width is the width of the web page */
-      }
-    </style>
-    <script>
-      // Note: This example requires that you consent to location sharing when
-      // prompted by your browser. If you see the error "The Geolocation service
-      // failed.", it means you probably did not give permission for the browser to
-      // locate you.
-      let map, infoWindow;
 
-      function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
-          // center: { lat: -34.397, lng: 150.644 },
-          zoom: 17,
-        });
-        infoWindow = new google.maps.InfoWindow();
-        //const locationButton = document.createElement("button");
-        //locationButton.textContent = "Pan to Current Location";
-        //locationButton.classList.add("custom-map-control-button");
-        //map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+<head>
+  <style type="text/css">
+    /* Set the size of the div element that contains the map */
+    #map {
+      height: 400px;
+      /* The height is 400 pixels */
+      width: 100%;
+      /* The width is the width of the web page */
+    }
+  </style>
+  <script>
+    // Note: This example requires that you consent to location sharing when
+    // prompted by your browser. If you see the error "The Geolocation service
+    // failed.", it means you probably did not give permission for the browser to
+    // locate you.
+    let map, infoWindow;
 
-        //locationButton.addEventListener("click", () => {
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-              };
-              infoWindow.setPosition(pos);
-              infoWindow.setContent("Location found.");
-              infoWindow.open(map);
-              map.setCenter(pos);
-            },
-            () => {
-              handleLocationError(true, infoWindow, map.getCenter());
-            }
-          );
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
+    function doMap() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+            // infoWindow.setPosition(pos);
+            // infoWindow.setContent("Location found.");
+            // infoWindow.open(map);
+            // map.setCenter(pos);
+            // alert(pos["lat"]);
+            // alert(pos["lng"]);
 
-        const myLatLng = { lat: -25.363, lng: 131.044 };
-        new google.maps.Marker({ position: myLatLng, map,});
-
-        //});
-      }
-
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(
-          browserHasGeolocation
-            ? "Error: The Geolocation service failed."
-            : "Error: Your browser doesn't support geolocation."
+            lat = pos["lat"];
+            lng = pos["lng"];
+            input1 = document.getElementById("lat");
+            input1.setAttribute("value", lat);
+            input2 = document.getElementById("lng");
+            input2.setAttribute("value", lng);
+          },
+          () => {
+            handleLocationError(true, infoWindow, map.getCenter());
+          }
         );
-        infoWindow.open(map);
+        // alert(navigator)
+
+        // p = navigator.geolocation.getCurrentPosition();
+        // alert(p);
+      } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
       }
-      // Initialize and add the map
-      // function initMap() {
-      //   // The location of Uluru
-      //   const uluru = {
-      //     lat: -25.344,
-      //     lng: 131.036
-      //   };
-      //   // The map, centered at Uluru
-      //   const map = new google.maps.Map(document.getElementById("map"), {
-      //     zoom: 4,
-      //     center: uluru,
-      //   });
-      //   // The marker, positioned at Uluru
-      //   const marker = new google.maps.Marker({
-      //     position: uluru,
-      //     map: map,
-      //   });
-      // }
-    </script>
-    <script>{{ jscode }}</script>
-  </head>
+    }
 
-  <body>
-    <h3>The Hunt is on...</h3>
-    <a href="pulledpork_search/">Pulled Pork</a>
-    <div>
-      {{ results }}
-    </div>
-    <!--The div element for the map -->
-    <div id="map"></div>
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        // center: { lat: -34.397, lng: 150.644 },
+        zoom: 17,
+      });
+      infoWindow = new google.maps.InfoWindow();
+      //const locationButton = document.createElement("button");
+      //locationButton.textContent = "Pan to Current Location";
+      //locationButton.classList.add("custom-map-control-button");
+      //map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
 
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key={{ APIKEY }}&callback=initMap&libraries=&v=weekly"
-      async
-    ></script>
-  </body>
+      //locationButton.addEventListener("click", () => {
+      // Try HTML5 geolocation.
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+            infoWindow.setPosition(pos);
+            infoWindow.setContent("Location found.");
+            infoWindow.open(map);
+            map.setCenter(pos);
+          },
+          () => {
+            handleLocationError(true, infoWindow, map.getCenter());
+          }
+        );
+      } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+      }
+
+      // const myLatLng = {
+      //   lat: {{ latitude }},
+      //   lng: {{ longitude }}
+      // };
+
+      // new google.maps.Marker({
+      //   position: myLatLng,
+      //   map,
+      // });
+
+      {{ jscode | safe }}
+
+      // with open('search.json', 'r') as openfile:
+      //   json_object = json.load(openfile)
+      // print(json_object)
+      // print(type(json_object))
+
+      //});
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+      infoWindow.setPosition(pos);
+      infoWindow.setContent(
+        browserHasGeolocation ?
+        "Error: The Geolocation service failed." :
+        "Error: Your browser doesn't support geolocation."
+      );
+      infoWindow.open(map);
+    }
+    // Initialize and add the map
+    // function initMap() {
+    //   // The location of Uluru
+    //   const uluru = {
+    //     lat: -25.344,
+    //     lng: 131.036
+    //   };
+    //   // The map, centered at Uluru
+    //   const map = new google.maps.Map(document.getElementById("map"), {
+    //     zoom: 4,
+    //     center: uluru,
+    //   });
+    //   // The marker, positioned at Uluru
+    //   const marker = new google.maps.Marker({
+    //     position: uluru,
+    //     map: map,
+    //   });
+    // }
+  </script>
+
+  <script>
+
+    function search(term) {
+      console.log("It will work", term);
+
+      document.getElementById("term").value = term;
+
+      document.getElementById("theForm").submit();
+    }
+
+  </script>
+</head>
+
+<body onload="doMap()">
+  <h3>The Hunt is on...</h3>
+  <!-- <button value="Position" onclick="doMap()">Position</button>
+    <a href="pulledpork_search/">Pulled Pork</a> -->
+  <form method="POST" id="theForm" action="/pulledpork_search/">
+    {% csrf_token %}
+    <input type="hidden" id="lat" name="lat" value="" />
+    <input type="hidden" id="lng" name="lng" value="" />
+    <input type="hidden" id="term" name="term" value="" />
+
+
+    <!-- <img src="/BBQ/BBQ/templates/products/Baby_Back.jpg" /> -->
+
+    <button onclick="search('pulled pork')" type="button">Pulled Pork</button>
+
+    <button onclick="search('brisket')" type="button">Briskets</button>
+
+    <button onclick="search('baby back ribs')" type="button">Baby Back Ribs</button>
+   
+   <!-- <select id="term" name ="term">
+     <option value="brisket">Some Briskets</option>
+     <option value="pulled pork">Jummy pulled pork</option>
+   </select>
+   
+    <input type="submit" id="searchbutton" name="Search" value="perform the search" /> -->
+  </form>
+
+    {% for key, value in results.items %}
+      {% if key == "businesses" %}
+        {% for res in value %}
+        <div>{{ res.name }}</div>
+        <img src={{res.image_url}} />
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+
+
+  
+  
+  
+ 
+
+  <!--The div element for the map -->
+  <div id="map"></div>
+
+  <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+  <script src="https://maps.googleapis.com/maps/api/js?key={{ APIKEY }}&callback=initMap&libraries=&v=weekly" async>
+  </script>
+</body>
+
 </html>
 
 {% endblock %}
